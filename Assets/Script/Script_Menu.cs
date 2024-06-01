@@ -1,6 +1,7 @@
 using Cinemachine;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -10,6 +11,8 @@ public class Script_Menu : MonoBehaviour {
     [SerializeField] private Canvas ATH_Canvas;
     [SerializeField] private CinemachineVirtualCamera CamJoueur;
     [SerializeField] private CinemachineVirtualCamera CamPause;
+    [SerializeField] private Transform Player;
+    [SerializeField] private TextMeshProUGUI Timer_display;
 
     public void Start_Level() {
 
@@ -18,9 +21,16 @@ public class Script_Menu : MonoBehaviour {
 
     public void Quit_Game() {
 
-        Time.timeScale = 1f;
-
         Application.Quit();
+    }
+
+    public void UptadeTime() {
+
+       int sec = Mathf.FloorToInt(Player.GetComponent<player_moveset>().Get_Time());
+
+        Debug.Log(sec);
+
+        Timer_display.text = "time " + sec;
     }
 
     public void Pause_Game() {
@@ -34,10 +44,10 @@ public class Script_Menu : MonoBehaviour {
                 ATH_Canvas.gameObject.SetActive(false);
             }
 
+            Player.GetComponent<player_moveset>().OnFreeze();
+
             CamJoueur.Priority = 0;
             CamPause.Priority = 10;
-
-            Time.timeScale = 0f;
         }
     }
 
@@ -53,16 +63,15 @@ public class Script_Menu : MonoBehaviour {
                 ATH_Canvas.gameObject.SetActive(true);
             }
 
+            Player.GetComponent<player_moveset>().OffFreeze();
+
             CamJoueur.Priority = 10;
             CamPause.Priority = 0;
-
-            Time.timeScale = 1f;
         }
     }
 
     public void Start_Menue() {
 
-        Time.timeScale = 1f;
 
         CamJoueur.Priority = 10;
         CamPause.Priority = 0;

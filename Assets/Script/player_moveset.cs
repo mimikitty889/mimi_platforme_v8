@@ -35,6 +35,7 @@ public class player_moveset : MonoBehaviour
 
     /* --- State --- */
     private bool _IsGrounded;
+    private bool Freeze;
 
     /* --- Enemy --- */
     [Header("Enemy")]
@@ -59,12 +60,15 @@ public class player_moveset : MonoBehaviour
     [SerializeField] private Transform Waypoint_Bag;
 
     /* --- Debug --- */
-
     [Header("Debug")]
     [SerializeField] private bool Debug_jump = false;
     [SerializeField] private bool Debug_Waypoint_Detector = false;
     [SerializeField] private bool Debug_Enemy_Detector = false;
 
+    /* --- Time --- */
+    [Header("Time")]
+    [SerializeField] private float _Timer = 0.0f;
+    [SerializeField] private float Time_Collectible_Add = 0.0f;
 
 
 
@@ -114,6 +118,31 @@ public class player_moveset : MonoBehaviour
 
     }
 
+
+    /************************************  Time  ************************************/
+
+    private void Time_manager() {
+
+        if (!Freeze) {
+            _Timer -= Time.deltaTime;
+        }
+        
+
+        if (_Timer <= 0 ) {
+            Pause_Menue.GetComponent<Script_Menu>().Start_Menue();
+        }
+    }
+
+    private void Time_Add() {
+        
+        _Timer += Time_Collectible_Add;
+    }
+
+    public float Get_Time() {
+
+        return _Timer;
+    }
+
     /************************************  Update  ************************************/
 
 
@@ -126,6 +155,8 @@ public class player_moveset : MonoBehaviour
         Ground_detection();
         Enemy_Detection();
         Waypoint_Detection();
+        Time_manager();
+        Pause_Menue.GetComponent<Script_Menu>().UptadeTime();
     }
 
 
@@ -204,6 +235,14 @@ public class player_moveset : MonoBehaviour
 
     }
 
+    public void OnFreeze() {
+        Freeze = true;
+    }
+
+    public void OffFreeze() {
+        Freeze = false;
+    }
+
     /************************************  Jump  ************************************/
 
 
@@ -233,14 +272,9 @@ public class player_moveset : MonoBehaviour
 
     private void Add_Collectible() {
 
-        Coin_Amount = Coin_Amount + 1;
+        Time_Add();
 
         //jouer le son des piece
-    }
-
-    public int Get_Collectible_Amount() {
-
-        return Coin_Amount;
     }
 
 

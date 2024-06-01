@@ -6,6 +6,7 @@ TagManager:
   tags:
   - Platform
   - deathbox
+  - Coin
   layers:
   - Default
   - TransparentFX
