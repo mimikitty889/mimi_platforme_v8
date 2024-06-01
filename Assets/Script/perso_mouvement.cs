@@ -46,56 +46,59 @@ public class perso_mouvement : MonoBehaviour
     PlayerMouvement();
     }
     private void FixedUpdate(){
+
         IsGround = Physics2D.OverlapCircle(FD.position, checkRadius, WhatIsGround);
-    if (RB.velocity.y < 0){
-    RB.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier -1) * Time.deltaTime;
-    }
-    else if (RB.velocity.y > 0 && !Input.GetKey(KeyCode.Space))
-    {
-    RB.velocity += Vector2.up * Physics2D.gravity.y * (JumpMultiplier -1) * Time.deltaTime;
-    }
+        if (RB.velocity.y < 0){
+
+            RB.velocity += Vector2.up * Physics2D.gravity.y * (FallMultiplier -1) * Time.deltaTime;
+
+        } else if (RB.velocity.y > 0 && !Input.GetKey(KeyCode.Space)) {
+
+            RB.velocity += Vector2.up * Physics2D.gravity.y * (JumpMultiplier -1) * Time.deltaTime;
+        }
     }
 
      // la je veux que mon perso bouge 
-    void PlayerMouvement()
-    {
-    //quand on appuie sur la fleche de droite ect saut et tout ça
-    if (Input.GetKey(KeyCode.RightArrow))
-    {
-          transform.Translate(Vector2.right * Speed * Time.deltaTime);
-          SR.flipX = false;
-    }
-    if (Input.GetKey(KeyCode.LeftArrow))
-    {
-          transform.Translate(Vector2.left * Speed * Time.deltaTime);
-          SR.flipX = true;
-    }
+    void PlayerMouvement() {
+
+        //quand on appuie sur la fleche de droite ect saut et tout ça
+        if (Input.GetKey(KeyCode.RightArrow)) {
+
+              transform.Translate(Vector2.right * Speed * Time.deltaTime);
+              SR.flipX = false;
+
+        } if (Input.GetKey(KeyCode.LeftArrow)) {
+
+              transform.Translate(Vector2.left * Speed * Time.deltaTime);
+
+              SR.flipX = true;
+        }
 
     /*if (isDashing)
     {
     return; 
     }*/
 
-    if (Input.GetKeyDown(KeyCode.Space) && IsGround == true)
-    {
-    if (IsGround == true)   
-    {RB.velocity = (Vector2.up * Boing);
-    Jump = true; 
-    JumpTimeCounter = JumpTime;}
+        if (Input.GetKeyDown(KeyCode.Space) && IsGround == true) {
+            if (IsGround == true) {
+                RB.velocity = (Vector2.up * Boing);
+                Jump = true; 
+                JumpTimeCounter = JumpTime;
+            }
    
-    if (Jump == true && Input.GetKey(KeyCode.Space))
-    {if (JumpTimeCounter > 0)
-     {RB.velocity = (Vector2.up * Boing); 
-     JumpTimeCounter-= Time.deltaTime;
-     }
-     else {Jump = false;}
-    }
-    }
+            if (Jump == true && Input.GetKey(KeyCode.Space)) {
+                if (JumpTimeCounter > 0) {
+                    RB.velocity = (Vector2.up * Boing); 
+                    JumpTimeCounter-= Time.deltaTime;
+                } else {
+                    Jump = false;
+                }
+            }
+        }
     
-    if (Input.GetKeyUp(KeyCode.Space)) 
-    {
-        Jump = false;
-    }
+        if (Input.GetKeyUp(KeyCode.Space)) {
+            Jump = false;
+        }
 
     /*if (Input.GetKeyDown(KeyCode.LeftShift) && canDash)
     {
