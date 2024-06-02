@@ -326,7 +326,7 @@ public class player_moveset : MonoBehaviour
 
         foreach (var Object in Enemy_Detector) {
 
-            if (Object.tag == "Enemy") {
+            if (Object.tag == "deathbox") {
 
                 Respawn();
             }

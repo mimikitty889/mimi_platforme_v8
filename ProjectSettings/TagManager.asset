@@ -8,6 +8,7 @@ TagManager:
   - deathbox
   - Coin
   - Patrol
+  - Waypoint
   layers:
   - Default
   - TransparentFX
