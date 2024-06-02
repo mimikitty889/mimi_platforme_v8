@@ -7,14 +7,15 @@ TagManager:
   - Platform
   - deathbox
   - Coin
+  - Patrol
   layers:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
+  - Mobs
   - 
   - 
   - 

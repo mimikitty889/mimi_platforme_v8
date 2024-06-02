@@ -11,9 +11,7 @@ public class Script_Ia : MonoBehaviour {
 
     // --- Patrol --- \\
     [Header("Patrol Detection Setting")]
-    [SerializeField] private Transform Patrol_Detector_Position;
-    [SerializeField] private Vector2 Patrol_Detector_Size;
-    [SerializeField] private LayerMask Patrol_Detector_ColisionLayer;
+    [SerializeField] private float Patrol_Detector_Size;
 
     // --- Ai Setting --- \\
     [Header("AI Stetting")]
@@ -43,8 +41,6 @@ public class Script_Ia : MonoBehaviour {
         _RigideBody = this.GetComponent<Rigidbody2D>();
         _SpriteRenderer = this.GetComponent<SpriteRenderer>();
         _Transform = this.GetComponent<Transform>();
-
-        Patrol_Detector_Position = _Transform;
 
         Is_Freeze = false;
 
@@ -116,7 +112,7 @@ public class Script_Ia : MonoBehaviour {
 
             CleenSpeed = CleenSpeed * -1;
 
-            if (Vector2.Distance(_Transform.position, Left_Point.position) < 0.25f) {
+            if (Vector2.Distance(_Transform.position, Left_Point.position) < Patrol_Detector_Size) {
 
                 Current_Patrol_Point = 1;
             }
@@ -125,7 +121,7 @@ public class Script_Ia : MonoBehaviour {
         if (Current_Patrol_Point == 1) {
 
             _SpriteRenderer.flipX = true;
-            if (Vector2.Distance(_Transform.position, Right_Point.position) < 0.25f) {
+            if (Vector2.Distance(_Transform.position, Right_Point.position) < Patrol_Detector_Size) {
 
                 Current_Patrol_Point = 0;
             }
