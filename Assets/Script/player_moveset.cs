@@ -4,9 +4,13 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using System;
 using TMPro;
+using Cinemachine;
+
 
 public class player_moveset : MonoBehaviour
 {
+    /* --- Camera --- */
+    [SerializeField] private CinemachineVirtualCamera Camera;
 
     /* --- Stat --- */
     [Header("Stat")]
@@ -148,15 +152,19 @@ public class player_moveset : MonoBehaviour
 
     private void FixedUpdate() {
 
-        Movement_Update();
-        Fall_Manager();
-        Caracter_Orientation();
+        if (!Freeze)
+        {
+            Movement_Update();
+            Fall_Manager();
+            Caracter_Orientation();
 
-        Ground_detection();
-        Enemy_Detection();
-        Waypoint_Detection();
-        Time_manager();
-        Pause_Menue.GetComponent<Script_Menu>().UptadeTime();
+            Ground_detection();
+            Enemy_Detection();
+            Waypoint_Detection();
+            Time_manager();
+            Pause_Menue.GetComponent<Script_Menu>().UptadeTime();
+        }
+       
     }
 
 
@@ -196,6 +204,12 @@ public class player_moveset : MonoBehaviour
 
     }
 
+    /************************************  Camera  ************************************/
+
+    public void SwitchCamera()
+    {
+        Camera.m_Lens.OrthographicSize = 105.3f;
+    }
 
     /************************************  Mouvement  ************************************/
 
@@ -237,6 +251,7 @@ public class player_moveset : MonoBehaviour
 
     public void OnFreeze() {
         Freeze = true;
+        _rigidbody.velocity = new Vector2(0, 0);
     }
 
     public void OffFreeze() {
@@ -281,13 +296,21 @@ public class player_moveset : MonoBehaviour
     /************************************  Respawn  ************************************/
 
 
-    private void Respawn() {
+    public void Respawn() {
 
         // trigger animation death
 
         _rigidbody.position = Waypoint_Bag.position;
-
+        _Animator.ResetTrigger("T_Death");
         // trigger animation Respawn
+    }
+
+    private void DeathAnimation()
+    {
+        _Animator.SetBool("B_Run", false);
+        _Animator.SetBool("B_Jump", false);
+        _Animator.SetTrigger("T_Death");
+
     }
 
 
@@ -328,7 +351,7 @@ public class player_moveset : MonoBehaviour
 
             if (Object.tag == "deathbox") {
 
-                Respawn();
+                DeathAnimation();
             }
         }
     }
