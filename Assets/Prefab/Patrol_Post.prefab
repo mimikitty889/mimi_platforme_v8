@@ -14,7 +14,7 @@ PrefabInstance:
       objectReference: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 888328958166772175, guid: e28efafd06625e542bb0cbc4678c3565, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 991613007291561729, guid: e28efafd06625e542bb0cbc4678c3565, type: 3}
       propertyPath: m_Icon
@@ -26,7 +26,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 991613007291561729, guid: e28efafd06625e542bb0cbc4678c3565, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 6092817114885465325, guid: e28efafd06625e542bb0cbc4678c3565, type: 3}
       propertyPath: m_Icon
@@ -34,7 +34,7 @@ PrefabInstance:
       objectReference: {fileID: -5938655980376293919, guid: 0000000000000000d000000000000000, type: 0}
     - target: {fileID: 6092817114885465325, guid: e28efafd06625e542bb0cbc4678c3565, type: 3}
       propertyPath: m_Layer
-      value: 10
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 7537303090980828844, guid: e28efafd06625e542bb0cbc4678c3565, type: 3}
       propertyPath: m_LocalScale.x
